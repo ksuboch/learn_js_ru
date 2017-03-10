@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sript loading</title>
+</head>
+<body>
+	<!-- Если предположить, что small.js загружается быстрее, чем big.js - какой выполнится первым -->
+	<script src="big.js"></script> 
+	<!-- будет загружен и выполнен первым -->
+	<script src="small.js"></script>
+	<!-- будет ожидать загрузки и выполнения big.js -->
+
+	<script aysnc src="small.js"></script>
+	<!-- будет выполнен сразу после загрузки (предположительно после small.js) -->
+	<script aysnc src="big.js"></script>
+	<!-- будет выполнен сразу после загрузки (предположительно раньше big.js), т.к. из-за async скрипты ведут себя независимо-->
+
+	<script defer src="big.js"></script>
+	<!-- будет выполнен первым (полсе загрузки документов и скриптов), т.к. defer сохраняет порядок скриптов -->
+	<script defer src="small.js"></script>
+	<!-- будет выполнен после big.js, после загрузки документов и скриптов -->
+</body>
+</html>
