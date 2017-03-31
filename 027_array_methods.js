@@ -125,3 +125,49 @@ var vovochka = { name: "Вовочка", age: 6 };
 var people = [ vasya , masha , vovochka ];
 
 console.log(people.sort(function(a, b) {return a.age - b.age}));
+
+// напишите функцию aclean(arr), которая возвращает массив без анаграмм
+
+var arr = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"];
+
+function aclean(arr) {
+	var tmp = {};
+
+	for (var i = 0; i < arr.length; i++) {
+		var keyName = arr[i].toLowerCase().split("").sort(function(a,b) { return a < b? -1 : 1}).join("");
+		if (!tmp[keyName]) {
+			tmp[keyName] = arr[i];
+		}
+	}
+
+	var resArr = [];
+	for(var key in tmp) {
+		resArr.push(tmp[key]);
+	}
+
+	return resArr;
+}
+
+console.log(aclean(arr));
+
+// напишите функцию unique(arr), которая возвращает массив, содержащий только уникальные
+// элементы arr
+
+function unique(arr) {
+	var tmp = {};
+	for (var i = 0; i < arr.length; i++) {
+		if (!tmp[arr[i]]) {
+			tmp[arr[i]] = true;
+		}
+	}
+
+	var resArr = [];
+	for (var key in tmp) {
+		resArr.push(key);
+	}
+	return resArr;
+}
+
+var strings = ["кришна", "кришна", "харе", "харе", 
+			   "харе", "харе", "кришна", "кришна", "8-()"];
+console.log(unique(strings));
