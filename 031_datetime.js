@@ -72,3 +72,53 @@ function getSecondsToTomorrow() {
 }
 
 console.log(getSecondsToTomorrow());
+
+// Напишите функцию formatDate(date), которая выводит дату date в формате дд.мм.гг
+
+function format2digits(a) {
+	if (a < 10) {
+		a = "0" + a;
+	}
+	return a;
+}
+
+function formatDate(d) {
+	day = format2digits(d.getDate());
+	month = format2digits(d.getMonth() + 1);
+	year = d.getFullYear().toString().slice(2);
+	return day + "." + month + "." + year;
+}
+
+var d = new Date(2014, 0, 1); // 30 января 2014
+console.log(formatDate(d)); // '30.01.14'
+
+// Напишите функцию formatDate2(date), которая форматирует дату date так:
+//
+// Если со времени date прошло менее секунды, то возвращает "только что".
+// Иначе если со времени date прошло менее минуты, то "n сек. назад".
+// Иначе если прошло меньше часа, то "m мин. назад".
+// Иначе полная дата в формате "дд.мм.гг чч:мм".
+
+function formatDate2(date) {
+	now = new Date();
+	diff = now - date;
+	if (diff < 1000){
+		return "Только что";
+	} else if (diff < 60 * 1000) {
+		return (diff / 1000) + " сек. назад";
+	} else if (diff < 60 * 60 * 1000) {
+		return (diff / (60 * 1000)) + " мин. назад";
+	} else {
+		day = format2digits(date.getDate());
+		month = format2digits(date.getMonth() + 1);
+		year = date.getFullYear().toString().slice(2);
+		hour = format2digits(date.getHours());
+		minute = format2digits(date.getMinutes());
+		return day + "." + month + "." + day + " " + hour + ":" + minute;
+	}
+}
+
+console.log(formatDate2(new Date(new Date - 1)));
+console.log(formatDate2(new Date(new Date - 30 * 1000)));
+console.log(formatDate2(new Date(new Date - 5 * 60 * 1000)));
+console.log(formatDate2(new Date(new Date - 86400 * 1000)));
